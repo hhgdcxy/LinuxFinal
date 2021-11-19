@@ -10,7 +10,7 @@ public class HelloworldJson extends HttpServlet {
       response.setCharacterEncoding("UTF-8");
       PrintWriter out = response.getWriter();
       Gson gson = new Gson();
-      Student stu = new Student("dddd");
+      Student stu = new Student(1,"xiaohong",10);
       String json = gson.toJson(stu);
       out.println(json);
       out.flush();
