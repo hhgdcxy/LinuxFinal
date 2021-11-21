@@ -17,7 +17,7 @@ public class Text2 extends HttpServlet {
 
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
-          response.setContentType("text2/html");
+          response.setContentType("text/html");
           PrintWriter out = response.getWriter();
 
           Student stu = getStudent();
@@ -27,16 +27,16 @@ public class Text2 extends HttpServlet {
     
     public Student getStudent() {
         Student stu = new Student();
-        Connection conn = null;
+	Connection conn = null;
         Statement stmt = null;
         try {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM t_student WHERE id=4";
+            String sql = "SELECT id,name FROM t_student WHERE id=4";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                stu.id = rs.getInt("id");
+		stu.id = rs.getInt("id");
                 stu.name = rs.getString("name");
             }
             rs.close();
@@ -63,23 +63,6 @@ public class Text2 extends HttpServlet {
     public class Student {
 	public int id;
 	public String name;
-	public Student(int id,String name) {
-		this.id=id;
-		this.name=name;
-	}
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-    }
+    }	
 
 }
